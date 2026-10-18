@@ -8,3 +8,7 @@ firmware-realtek
 calamares
 calamares-settings-debian
 fastfetch
+
+# Terminal
+kitty
+xfce4-terminal
