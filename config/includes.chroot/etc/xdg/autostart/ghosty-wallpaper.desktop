@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=GhostyOS Wallpaper
+Exec=/usr/local/bin/ghosty-wallpaper
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true

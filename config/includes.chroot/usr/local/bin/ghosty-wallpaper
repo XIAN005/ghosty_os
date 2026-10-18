@@ -1,0 +1,10 @@
+#!/bin/sh
+# Applique le fond GhostyOS sur tous les ecrans et espaces de travail
+IMG="/usr/share/backgrounds/ghosty_os/GW5.png"
+sleep 2
+for p in $(xfconf-query -c xfce4-desktop -l | grep "/last-image$"); do
+    xfconf-query -c xfce4-desktop -p "$p" -s "$IMG"
+done
+for p in $(xfconf-query -c xfce4-desktop -l | grep "/image-style$"); do
+    xfconf-query -c xfce4-desktop -p "$p" -s 5
+done
