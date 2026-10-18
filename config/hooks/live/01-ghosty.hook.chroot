@@ -5,4 +5,4 @@ set -e
 sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="GhostyOS"/' /etc/os-release
 
 # Lancer neofetch à l'ouverture d'un terminal
-echo 'neofetch' >> /etc/skel/.bashrc
+echo 'fastfetch' >> /etc/skel/.bashrc
