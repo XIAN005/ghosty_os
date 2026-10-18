@@ -17,3 +17,8 @@ xfce4-terminal
 papirus-icon-theme
 arc-theme
 fonts-noto
+
+# Langues
+locales
+console-setup
+keyboard-configuration

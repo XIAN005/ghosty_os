@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+# Générer le français (secours) et le créole haïtien si disponible
+sed -i 's/^# *fr_FR.UTF-8/fr_FR.UTF-8/' /etc/locale.gen
+if grep -q "ht_HT" /etc/locale.gen; then
+    sed -i 's/^# *ht_HT.UTF-8/ht_HT.UTF-8/' /etc/locale.gen
+    LANG_DEFAUT="ht_HT.UTF-8"
+else
+    LANG_DEFAUT="fr_FR.UTF-8"
+fi
+locale-gen
+
+# Langue par défaut avec repli créole -> français -> anglais
+cat > /etc/default/locale << EOT
+LANG=$LANG_DEFAUT
+LANGUAGE=ht:fr:en
+EOT
+
+# Fuseau horaire d'Haïti
+ln -sf /usr/share/zoneinfo/America/Port-au-Prince /etc/localtime
+echo "America/Port-au-Prince" > /etc/timezone
