@@ -11,11 +11,17 @@ jobs:
     container:
       image: debian:trixie
       options: --privileged
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Installer les outils
         run: |
           apt-get update
-          apt-get install -y live-build git ca-certificates
+          apt-get install -y live-build debootstrap git ca-certificates \
+            gnupg debian-archive-keyring xz-utils squashfs-tools xorriso \
+            dosfstools mtools syslinux syslinux-common isolinux \
+            grub-pc-bin grub-efi-amd64-bin
 
       - name: Récupérer le code
         uses: actions/checkout@v4
@@ -24,7 +30,17 @@ jobs:
         run: lb config
 
       - name: Construire l'ISO
-        run: lb build
+        run: |
+          set -o pipefail
+          lb build 2>&1 | tee build.log
+
+      - name: Afficher le log debootstrap en cas d'échec
+        if: failure()
+        run: |
+          echo "=== debootstrap.log ==="
+          tail -n 60 chroot/debootstrap/debootstrap.log || true
+          echo "=== fin de build.log ==="
+          tail -n 60 build.log || true
 
       - name: Renommer l'ISO
         run: mv live-image-amd64.hybrid.iso GhostyOS.iso
@@ -35,3 +51,10 @@ jobs:
           name: GhostyOS-iso
           path: GhostyOS.iso
           retention-days: 14
+
+      - name: Publier le log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
