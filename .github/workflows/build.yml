@@ -1,0 +1,37 @@
+name: Build GhostyOS ISO
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie
+      options: --privileged
+    steps:
+      - name: Installer les outils
+        run: |
+          apt-get update
+          apt-get install -y live-build git ca-certificates
+
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Configurer
+        run: lb config
+
+      - name: Construire l'ISO
+        run: lb build
+
+      - name: Renommer l'ISO
+        run: mv live-image-amd64.hybrid.iso GhostyOS.iso
+
+      - name: Publier l'ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: GhostyOS-iso
+          path: GhostyOS.iso
+          retention-days: 14
