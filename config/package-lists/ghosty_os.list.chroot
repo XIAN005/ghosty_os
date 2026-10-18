@@ -12,3 +12,8 @@ fastfetch
 # Terminal
 kitty
 xfce4-terminal
+
+# Apparence
+papirus-icon-theme
+arc-theme
+fonts-noto
