@@ -3,7 +3,7 @@
   "logo": {
     "type": "file",
     "source": "/usr/share/ghosty_os/Ghostyascii.txt",
-    "color": { "1": "blue" },
+    "color": { "1": "white" },
     "padding": { "right": 3 }
   },
   "display": { "separator": ": " },
