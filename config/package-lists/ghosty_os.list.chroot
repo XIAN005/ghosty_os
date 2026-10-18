@@ -22,3 +22,6 @@ fonts-noto
 locales
 console-setup
 keyboard-configuration
+
+# Dock
+plank
