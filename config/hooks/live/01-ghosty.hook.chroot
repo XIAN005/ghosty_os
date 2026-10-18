@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+# Renommer l'OS dans os-release
+sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="GhostyOS"/' /etc/os-release
+
+# Lancer neofetch à l'ouverture d'un terminal
+echo 'neofetch' >> /etc/skel/.bashrc
