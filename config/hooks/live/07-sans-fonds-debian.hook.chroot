@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# Fonds du paquet desktop-base (on garde le paquet lui-même)
+find /usr/share/desktop-base -type f -path "*wallpaper*" -delete 2>/dev/null || true
+
+# Autres fonds système, sauf le nôtre
+for d in /usr/share/backgrounds/*; do
+    [ "$d" = "/usr/share/backgrounds/ghosty_os" ] && continue
+    rm -rf "$d"
+done
