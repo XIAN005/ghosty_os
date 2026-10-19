@@ -1,0 +1,5 @@
+#!/bin/sh
+# Renomme le menu de boot (GRUB et isolinux)
+for f in $(find binary -type f \( -name "*.cfg" -o -name "*.txt" \) 2>/dev/null); do
+    sed -i 's/Debian GNU\/Linux/GhostyOS/g; s/Debian Live/GhostyOS Live/g' "$f"
+done

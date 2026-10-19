@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+# os-release : nom visible, on garde ID et ID_LIKE
+sed -i 's/^NAME=.*/NAME="GhostyOS"/; s/^PRETTY_NAME=.*/PRETTY_NAME="GhostyOS"/' /etc/os-release
+sed -i 's|^HOME_URL=.*|HOME_URL="https://github.com/XIAN005/ghosty_os"|' /etc/os-release
+sed -i '/^SUPPORT_URL=/d; /^BUG_REPORT_URL=/d' /etc/os-release
+
+# Texte avant connexion
+printf 'GhostyOS \\n \\l\n\n' > /etc/issue
+printf 'GhostyOS\n' > /etc/issue.net
+printf 'Bienvenue sur GhostyOS (base Debian)\n' > /etc/motd
+
+# Lanceurs "Install Debian" et branding Calamares, si presents
+for f in /usr/share/applications/*install*debian*.desktop /usr/share/applications/calamares*.desktop; do
+    [ -f "$f" ] && sed -i 's/Install Debian/Installer GhostyOS/g; s/Debian Live/GhostyOS/g' "$f"
+done
+for f in $(grep -rl "Debian" /etc/calamares 2>/dev/null | grep -E "\.(conf|desc)$" || true); do
+    sed -i 's/Debian GNU\/Linux/GhostyOS/g; s/Debian/GhostyOS/g' "$f"
+done

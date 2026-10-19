@@ -6,7 +6,7 @@ lb config noauto \
   --architectures amd64 \
   --archive-areas "main contrib non-free-firmware" \
   --debian-installer none \
-  --bootappend-live "boot=live components quiet splash locales=ht_HT.UTF-8 keyboard-layouts=fr timezone=America/Port-au-Prince hostname=ghostyos user-fullname=GhostyOS" \
+  --bootappend-live "boot=live components quiet splash locales=ht_HT.UTF-8 keyboard-layouts=fr timezone=America/Port-au-Prince hostname=ghostyos user-fullname=Ghosty" \
   --iso-application "GhostyOS" \
   --iso-volume "GhostyOS" \
   --memtest none \
